@@ -781,6 +781,21 @@
     }
   },
   "talks": [],
+  "press": [
+    {
+      "outlet": "KentStater",
+      "headline": "Kent State's Advanced Medical Robot Lab leads healthcare research",
+      "author": "Will Jernigan",
+      "date": "March 6, 2025",
+      "url": "https://kentstater.com/127367/news/campus/kent-states-advanced-medical-robot-lab-leads-healthcare-research/",
+      "image": "assets/press/kentstater-robotics-lab.webp",
+      "imageAlt": "Workbench in the Advanced Medical Robot Lab. Photo: KentStater.",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "quote": "When you are doing something innovative, you are helping a mass of people; you are not helping only one person.",
+      "note": "The article says he works primarily with the lab’s electrode stimulation device and a surgery robot in Dr. Tao Shen’s Advanced Medical Robot Lab."
+    }
+  ],
   "beyond": {
     "intro": "",
     "hometown": "",

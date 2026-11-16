@@ -200,6 +200,7 @@ function renderProfile(profile) {
   renderInterests(profile.about && profile.about.interests);
   renderEducation(profile.education);
   renderPublications(profile);
+  renderPress(profile);
   renderExperience(profile.experience);
   renderCertifications(profile.certifications);
   renderProjects(profile.projects);
@@ -431,6 +432,75 @@ function renderPublications(profile) {
   const visible = papers.length + talks.length > 0;
   if (section) section.hidden = !visible;
   if (nav) nav.hidden = !visible;
+}
+
+function renderPress(profile) {
+  const items = (profile.press || []).filter((item) => !isPlaceholder(item.headline) && !isPlaceholder(item.url));
+  const section = document.querySelector("[data-press-section]");
+  const root = document.querySelector("[data-press]");
+  const featured = document.querySelector("[data-featured-press]");
+  if (section) section.hidden = items.length === 0;
+  if (featured) {
+    featured.hidden = items.length === 0;
+    const link = featured.querySelector("a");
+    if (link && items[0]) {
+      link.href = "#press";
+      link.textContent = `Featured in ${items[0].outlet || "the press"}`;
+    }
+  }
+  if (!root) return;
+  root.replaceChildren();
+  for (const item of items) root.append(pressCard(item));
+}
+
+function pressCard(item) {
+  const article = document.createElement("article");
+  article.className = "press-card";
+  if (!isPlaceholder(item.image)) {
+    const media = document.createElement("div");
+    media.className = "press-media";
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.imageAlt || item.headline;
+    img.width = item.imageWidth || 1200;
+    img.height = item.imageHeight || 800;
+    img.loading = "lazy";
+    img.decoding = "async";
+    media.append(img);
+    article.append(media);
+  }
+  const body = document.createElement("div");
+  body.className = "press-body";
+  const heading = document.createElement("h3");
+  heading.textContent = item.headline;
+  const meta = document.createElement("p");
+  meta.className = "press-meta";
+  meta.textContent = [item.outlet, item.date].filter((part) => !isPlaceholder(part)).join(" · ");
+  body.append(heading, meta);
+  if (!isPlaceholder(item.quote)) {
+    const quote = document.createElement("blockquote");
+    quote.className = "press-quote";
+    quote.textContent = `“${item.quote}”`;
+    body.append(quote);
+  }
+  if (!isPlaceholder(item.note)) {
+    const note = document.createElement("p");
+    note.className = "press-note";
+    note.textContent = item.note;
+    body.append(note);
+  }
+  const actions = document.createElement("div");
+  actions.className = "press-actions";
+  const link = document.createElement("a");
+  link.className = "button button-ghost";
+  link.href = item.url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Read article";
+  actions.append(link);
+  body.append(actions);
+  article.append(body);
+  return article;
 }
 
 function venueMarkup(text) {
