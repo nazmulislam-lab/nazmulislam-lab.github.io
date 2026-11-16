@@ -15,7 +15,7 @@ This site lists that background, his publications, experience, education and tra
 - [Publications](https://nazmulislam-lab.github.io/#publications): Journal and conference papers on medical imaging, explainable AI, and wearable devices
 - [Experience](https://nazmulislam-lab.github.io/#experience): Kent State, Medtronic, Philips Healthcare, Siemens Bangladesh, and Daffodil International University
 - [Education and training](https://nazmulislam-lab.github.io/#education): PhD at Kent State, MSc at BRAC University, BSc at CUET, and professional certifications
-- [Projects](https://nazmulislam-lab.github.io/#projects): Public software projects, including multi-agent-system, orca-draw, passport-photo-studio, northstar-reader, Chess_ORCA, and Nazmul-event-talks-app
+- [Projects](https://nazmulislam-lab.github.io/#projects): Public software projects, including multi-agent-system, orca-draw, passport-photo-studio, northstar-reader, Chess_ORCA, and Nazmul-event-talks-app, plus an open-source PennyLane skill in sickn33/agentic-awesome-skills
 - [Blog](https://nazmulislam-lab.github.io/blog/): Short notes on robotics and medical devices, from the lab and the field
 - [Contact](https://nazmulislam-lab.github.io/#contact): Email is the fastest way to reach him. A CV is available on request ([email](mailto:nazmul87@gmail.com?subject=CV%20request))
 

@@ -723,6 +723,35 @@
         "last-30-days",
         "30 days skill"
       ]
+    },
+    {
+      "id": "pennylane-skill",
+      "name": "PennyLane",
+      "language": "Open source",
+      "summary": "I added a PennyLane skill for differentiable quantum circuits (skills/pennylane/SKILL.md) to sickn33/agentic-awesome-skills. Merged Nov 16, 2026.",
+      "url": "https://github.com/sickn33/agentic-awesome-skills",
+      "demo": "",
+      "available": true,
+      "links": [
+        {
+          "label": "Repo",
+          "href": "https://github.com/sickn33/agentic-awesome-skills"
+        },
+        {
+          "label": "Skill",
+          "href": "https://github.com/sickn33/agentic-awesome-skills/tree/main/skills/pennylane"
+        },
+        {
+          "label": "Pull request",
+          "href": "https://github.com/sickn33/agentic-awesome-skills/pull/2352"
+        }
+      ],
+      "match": [
+        "pennylane",
+        "penny lane",
+        "agentic awesome skills",
+        "agentic-awesome-skills"
+      ]
     }
   ],
   "contact": {

@@ -638,8 +638,13 @@ function projectCard(project) {
   summary.textContent = project.summary;
   const links = document.createElement("div");
   links.className = "project-links";
-  if (!isPlaceholder(project.demo)) links.append(textLink(project.demo, "Live demo", "button button-primary"));
-  if (!isPlaceholder(project.url)) links.append(textLink(project.url, "Code", "button button-ghost"));
+  const custom = (project.links || []).filter((link) => link && !isPlaceholder(link.href) && !isPlaceholder(link.label));
+  if (custom.length) {
+    for (const link of custom) links.append(textLink(link.href, link.label, "button button-ghost"));
+  } else {
+    if (!isPlaceholder(project.demo)) links.append(textLink(project.demo, "Live demo", "button button-primary"));
+    if (!isPlaceholder(project.url)) links.append(textLink(project.url, "Code", "button button-ghost"));
+  }
   body.append(top, title, summary, links);
   card.append(body);
   return card;

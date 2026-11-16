@@ -113,12 +113,20 @@ function projectHtml(project) {
   const media = project.image
     ? `<div class="project-media"><img src="${escapeAttr(project.image)}"${srcset} alt="${escapeAttr(project.imageAlt || name)}" width="${project.imageWidth || 1200}" height="${project.imageHeight || 750}" loading="lazy" decoding="async"></div>`
     : "";
-  const links = [
+  const links = projectLinks(project);
+  const lang = project.language ? `<span class="pill">${escapeHtml(project.language)}</span>` : "";
+  return `<article class="project-card">${media}<div class="project-body"><div class="project-top">${lang}</div><h3>${escapeHtml(name)}</h3><p>${escapeHtml(project.summary)}</p><div class="project-links">${links}</div></div></article>`;
+}
+
+function projectLinks(project) {
+  const custom = (project.links || []).filter((link) => link && link.href && link.label);
+  if (custom.length) {
+    return custom.map((link) => `<a class="button button-ghost" href="${escapeAttr(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join("");
+  }
+  return [
     project.demo ? `<a class="button button-primary" href="${escapeAttr(project.demo)}" target="_blank" rel="noopener noreferrer">Live demo</a>` : "",
     project.url ? `<a class="button button-ghost" href="${escapeAttr(project.url)}" target="_blank" rel="noopener noreferrer">Code</a>` : ""
   ].filter(Boolean).join("");
-  const lang = project.language ? `<span class="pill">${escapeHtml(project.language)}</span>` : "";
-  return `<article class="project-card">${media}<div class="project-body"><div class="project-top">${lang}</div><h3>${escapeHtml(name)}</h3><p>${escapeHtml(project.summary)}</p><div class="project-links">${links}</div></div></article>`;
 }
 
 function pressHtml(items) {

@@ -161,9 +161,17 @@ function formatProject(project) {
   const lines = [`${project.name}${project.language ? ` (${project.language})` : ""}.`];
   const summary = visitorText(project.summary);
   if (summary) lines.push(summary);
+  lines.push(...projectLinkLines(project));
+  return lines.join("\n");
+}
+
+function projectLinkLines(project) {
+  const custom = (project.links || []).filter((link) => link && visitorText(link.href) && visitorText(link.label));
+  if (custom.length) return custom.map((link) => `${link.label}: ${link.href}`);
+  const lines = [];
   if (project.url) lines.push(project.url);
   if (project.demo) lines.push(`Live demo: ${project.demo}`);
-  return lines.join("\n");
+  return lines;
 }
 
 function formatAllProjects(profile) {
@@ -171,8 +179,7 @@ function formatAllProjects(profile) {
   for (const project of profile.projects.filter((item) => item.available)) {
     const summary = visitorText(project.summary);
     lines.push(`• ${project.name}${project.language ? ` (${project.language})` : ""}${summary ? ` — ${summary}` : ""}`);
-    if (project.url) lines.push(`  ${project.url}`);
-    if (project.demo) lines.push(`  Live demo: ${project.demo}`);
+    for (const line of projectLinkLines(project)) lines.push(`  ${line}`);
   }
   return lines.join("\n");
 }
