@@ -47,7 +47,7 @@ html = html.replace(
   feed.length ? '<section class="home-feed"' : '<section class="home-feed" hidden'
 );
 html = fill(html, "home-feed", homeFeedHtml(feed));
-const pressItems = (profile.press || []).filter((item) => item && item.headline && item.url);
+const pressItems = (profile.press || []).filter((item) => item && item.url && (item.title || item.headline));
 html = html.replace(
   /<section id="press" class="section reveal"(?: hidden)? data-press-section>/,
   `<section id="press" class="section reveal"${pressItems.length ? "" : " hidden"} data-press-section>`
@@ -61,7 +61,7 @@ const featured = pressItems[0];
 html = fill(
   html,
   "featured-press",
-  featured ? `<a href="#press">Featured in ${escapeHtml(featured.outlet || "the press")}</a>` : ""
+  featured ? `<a href="#press">${escapeHtml(featured.featured || `Featured in ${featured.outlet || "the press"}`)}</a>` : ""
 );
 html = fill(html, "contact-copy", (profile.collaborate.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("\n"));
 html = fill(html, "contact", contactHtml(profile.contact));
@@ -134,12 +134,16 @@ function projectHtml(project) {
 function pressHtml(items) {
   return items.map((item) => {
     const meta = [item.outlet, item.date].filter(Boolean).join(" · ");
+    const title = item.title || item.headline;
     const image = item.image
-      ? `<div class="press-media"><img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.imageAlt || item.headline)}" width="${Number(item.imageWidth) || 1200}" height="${Number(item.imageHeight) || 800}" loading="lazy" decoding="async"></div>`
+      ? `<div class="press-media"><img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.imageAlt || title)}" width="${Number(item.imageWidth) || 1200}" height="${Number(item.imageHeight) || 800}" loading="lazy" decoding="async"></div>`
+      : "";
+    const original = item.title && item.headline
+      ? `<p class="press-headline">${escapeHtml(item.headline)}</p>`
       : "";
     const quote = item.quote ? `<blockquote class="press-quote">“${escapeHtml(item.quote)}”</blockquote>` : "";
     const note = item.note ? `<p class="press-note">${escapeHtml(item.note)}</p>` : "";
-    return `<article class="press-card">${image}<div class="press-body"><h3>${escapeHtml(item.headline)}</h3><p class="press-meta">${escapeHtml(meta)}</p>${quote}${note}<div class="press-actions"><a class="button button-ghost" href="${escapeAttr(item.url)}" target="_blank" rel="noopener noreferrer">Read article</a></div></div></article>`;
+    return `<article class="press-card">${image}<div class="press-body"><h3>${escapeHtml(title)}</h3>${original}<p class="press-meta">${escapeHtml(meta)}</p>${quote}${note}<div class="press-actions"><a class="button button-ghost" href="${escapeAttr(item.url)}" target="_blank" rel="noopener noreferrer">Read article</a></div></div></article>`;
   }).join("\n");
 }
 

@@ -1118,6 +1118,14 @@ h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; letter-spacing: -0
 
 .press-body h3 { margin: 0; font-size: var(--text-md); }
 
+.press-headline {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 .press-meta {
   margin: 0;
   font-family: var(--sans);

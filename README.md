@@ -18,7 +18,7 @@ Change a fact there, run `node scripts/build.mjs`, commit, and push to `main`. R
 | Education | `education` (`school`, `degree`, `dates`, `gpa`, `standing`, `thesis`, `advisor`). Leave a field `""` to hide it. |
 | Papers | `publications` (the section hides when this and `talks` are both empty). A paper is `{ "title", "authors": [], "type": "journal" or "conference", "venue", "year", "date", "url" }`. The page bolds the name in `person.name` inside each author list. `url` should be the paper’s DOI link; leave it empty only if you cannot find one. |
 | Talks | `talks` (leave `[]` until you have a real talk) |
-| Press | `press`. An item is `{ "outlet", "headline", "author", "date", "url", "image", "imageAlt", "quote", "note" }`. The homepage shows an “In the press” card after Talks, and a small “Featured in …” line under the hero buttons. Leave `press` as `[]` to hide both. `image` is a file in the repo, not a hotlink. |
+| Press | `press`. An item is `{ "outlet", "featured", "title", "headline", "author", "date", "url", "image", "imageAlt", "quote", "note" }`. `title` is the card’s own heading. `headline` is the outlet’s original headline, shown smaller and muted under `title`. `featured` is the small hero line and links to `#press`. Leave `press` as `[]` to hide the section and the hero line. `image` is a file in the repo, not a hotlink. |
 | Jobs | `experience`. `dates` is the timeline label (for example `Aug 2024 – Present`). `duties` is the bullet list. Leave `dates` as `""` only when a range is unknown. |
 | Skills | `skills` |
 | Projects | `projects` (`image` is the card preview) |

@@ -435,7 +435,7 @@ function renderPublications(profile) {
 }
 
 function renderPress(profile) {
-  const items = (profile.press || []).filter((item) => !isPlaceholder(item.headline) && !isPlaceholder(item.url));
+  const items = (profile.press || []).filter((item) => !isPlaceholder(item.url) && (!isPlaceholder(item.title) || !isPlaceholder(item.headline)));
   const section = document.querySelector("[data-press-section]");
   const root = document.querySelector("[data-press]");
   const featured = document.querySelector("[data-featured-press]");
@@ -445,7 +445,7 @@ function renderPress(profile) {
     const link = featured.querySelector("a");
     if (link && items[0]) {
       link.href = "#press";
-      link.textContent = `Featured in ${items[0].outlet || "the press"}`;
+      link.textContent = items[0].featured || `Featured in ${items[0].outlet || "the press"}`;
     }
   }
   if (!root) return;
@@ -461,7 +461,7 @@ function pressCard(item) {
     media.className = "press-media";
     const img = document.createElement("img");
     img.src = item.image;
-    img.alt = item.imageAlt || item.headline;
+    img.alt = item.imageAlt || item.title || item.headline;
     img.width = item.imageWidth || 1200;
     img.height = item.imageHeight || 800;
     img.loading = "lazy";
@@ -472,11 +472,18 @@ function pressCard(item) {
   const body = document.createElement("div");
   body.className = "press-body";
   const heading = document.createElement("h3");
-  heading.textContent = item.headline;
+  heading.textContent = !isPlaceholder(item.title) ? item.title : item.headline;
+  body.append(heading);
+  if (!isPlaceholder(item.title) && !isPlaceholder(item.headline)) {
+    const original = document.createElement("p");
+    original.className = "press-headline";
+    original.textContent = item.headline;
+    body.append(original);
+  }
   const meta = document.createElement("p");
   meta.className = "press-meta";
   meta.textContent = [item.outlet, item.date].filter((part) => !isPlaceholder(part)).join(" · ");
-  body.append(heading, meta);
+  body.append(meta);
   if (!isPlaceholder(item.quote)) {
     const quote = document.createElement("blockquote");
     quote.className = "press-quote";
