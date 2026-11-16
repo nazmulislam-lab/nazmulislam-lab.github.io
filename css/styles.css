@@ -577,24 +577,6 @@ h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; letter-spacing: -0
 .cv-request a:hover,
 .cv-request a:focus-visible { color: var(--accent); }
 
-.featured-press {
-  margin: 0.28rem 0 0;
-  max-width: 36rem;
-  font-family: var(--sans);
-  font-size: var(--text-xs);
-  letter-spacing: 0.02em;
-  line-height: 1.45;
-  color: var(--muted);
-}
-
-.featured-press a {
-  color: inherit;
-  text-underline-offset: 0.18em;
-}
-
-.featured-press a:hover,
-.featured-press a:focus-visible { color: var(--accent); }
-
 .contact-actions .cv-request { margin-top: 0.55rem; }
 
 .contact-list {
