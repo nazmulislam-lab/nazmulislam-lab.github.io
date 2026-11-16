@@ -438,16 +438,7 @@ function renderPress(profile) {
   const items = (profile.press || []).filter((item) => !isPlaceholder(item.url) && (!isPlaceholder(item.title) || !isPlaceholder(item.headline)));
   const section = document.querySelector("[data-press-section]");
   const root = document.querySelector("[data-press]");
-  const featured = document.querySelector("[data-featured-press]");
   if (section) section.hidden = items.length === 0;
-  if (featured) {
-    featured.hidden = items.length === 0;
-    const link = featured.querySelector("a");
-    if (link && items[0]) {
-      link.href = "#media";
-      link.textContent = items[0].featured || `Featured in ${items[0].outlet || "the press"}`;
-    }
-  }
   if (!root) return;
   root.replaceChildren();
   for (const item of items) root.append(pressCard(item));

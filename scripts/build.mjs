@@ -52,17 +52,7 @@ html = html.replace(
   /<section id="media" class="section reveal"(?: hidden)? data-press-section>/,
   `<section id="media" class="section reveal"${pressItems.length ? "" : " hidden"} data-press-section>`
 );
-html = html.replace(
-  /<p class="featured-press"(?: hidden)? data-featured-press>/,
-  `<p class="featured-press"${pressItems.length ? "" : " hidden"} data-featured-press>`
-);
 html = fill(html, "press", pressHtml(pressItems));
-const featured = pressItems[0];
-html = fill(
-  html,
-  "featured-press",
-  featured ? `<a href="#media">${escapeHtml(featured.featured || `Featured in ${featured.outlet || "the press"}`)}</a>` : ""
-);
 html = fill(html, "contact-copy", (profile.collaborate.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("\n"));
 html = fill(html, "contact", contactHtml(profile.contact));
 html = fill(html, "hero-social", heroSocialHtml(profile.contact));
