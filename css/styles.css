@@ -571,6 +571,24 @@ h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; letter-spacing: -0
 .cv-request a:hover,
 .cv-request a:focus-visible { color: var(--accent); }
 
+.featured-press {
+  margin: 0.28rem 0 0;
+  max-width: 36rem;
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.featured-press a {
+  color: inherit;
+  text-underline-offset: 0.18em;
+}
+
+.featured-press a:hover,
+.featured-press a:focus-visible { color: var(--accent); }
+
 .contact-actions .cv-request { margin-top: 0.55rem; }
 
 .contact-list {
@@ -1068,6 +1086,77 @@ h3 { margin: 0; font-size: var(--text-md); line-height: 1.25; letter-spacing: -0
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.press-list { display: grid; gap: 1rem; }
+
+.press-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+  align-items: stretch;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.press-media { background: var(--chip); min-height: 100%; }
+
+.press-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.press-body {
+  padding: 1.15rem 1.25rem 1.2rem;
+  display: grid;
+  gap: 0.45rem;
+  align-content: center;
+}
+
+.press-body h3 { margin: 0; font-size: var(--text-md); }
+
+.press-headline {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.press-meta {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.press-quote {
+  margin: 0.15rem 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.press-note {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.press-actions { margin-top: 0.35rem; }
+
+.press-actions .button { padding: 0.45rem 0.85rem; }
+
+@media (max-width: 860px) {
+  .press-card { grid-template-columns: 1fr; }
+  .press-media img { height: 180px; width: 100%; }
+  .press-body { padding: 0.95rem 1.05rem 1.1rem; }
 }
 
 @media (max-width: 600px) {
