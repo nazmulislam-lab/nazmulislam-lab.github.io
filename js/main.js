@@ -444,7 +444,7 @@ function renderPress(profile) {
     featured.hidden = items.length === 0;
     const link = featured.querySelector("a");
     if (link && items[0]) {
-      link.href = "#press";
+      link.href = "#media";
       link.textContent = items[0].featured || `Featured in ${items[0].outlet || "the press"}`;
     }
   }

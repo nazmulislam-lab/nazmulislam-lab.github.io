@@ -49,8 +49,8 @@ html = html.replace(
 html = fill(html, "home-feed", homeFeedHtml(feed));
 const pressItems = (profile.press || []).filter((item) => item && item.url && (item.title || item.headline));
 html = html.replace(
-  /<section id="press" class="section reveal"(?: hidden)? data-press-section>/,
-  `<section id="press" class="section reveal"${pressItems.length ? "" : " hidden"} data-press-section>`
+  /<section id="media" class="section reveal"(?: hidden)? data-press-section>/,
+  `<section id="media" class="section reveal"${pressItems.length ? "" : " hidden"} data-press-section>`
 );
 html = html.replace(
   /<p class="featured-press"(?: hidden)? data-featured-press>/,
@@ -61,7 +61,7 @@ const featured = pressItems[0];
 html = fill(
   html,
   "featured-press",
-  featured ? `<a href="#press">${escapeHtml(featured.featured || `Featured in ${featured.outlet || "the press"}`)}</a>` : ""
+  featured ? `<a href="#media">${escapeHtml(featured.featured || `Featured in ${featured.outlet || "the press"}`)}</a>` : ""
 );
 html = fill(html, "contact-copy", (profile.collaborate.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("\n"));
 html = fill(html, "contact", contactHtml(profile.contact));
