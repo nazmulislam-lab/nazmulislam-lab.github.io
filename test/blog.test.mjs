@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { canonicalCategory, chooseCover, coverUrl, dropDuplicateTitle, homeFeed, homeFeedHtml, isUpdate, markdownToHtml, newsPosts } from "../js/blog.js";
+import { canonicalCategory, chooseCover, coverUrl, dropDuplicateTitle, homeFeed, homeFeedHtml, isUpdate, markdownToHtml, newsHref, newsPosts } from "../js/blog.js";
 
 const post = readFileSync(new URL("../blog/posts/stop-slop-humanizer.md", import.meta.url), "utf8");
 const title = "Two Claude skills that fix how AI writes my emails";
@@ -100,13 +100,25 @@ const sample = [
   { slug: "unset", title: "Unset", date: "2026-10-19" }
 ];
 assert.deepEqual(newsPosts(sample).map((post) => post.slug), ["newer", "older"]);
+const paperNews = "New paper in Sensors and Actuators A: Physical on an optically pumped magnetometer for biomedical signal detection";
+const paperUrl = "https://doi.org/10.1016/j.sna.2026.118830";
+const paperEntry = posts.posts.find((post) => post.slug === "optically-pumped-magnetometer");
+assert.equal(paperEntry.category, "News");
+assert.equal(paperEntry.date, "2026-11");
+assert.equal(paperEntry.published, "2026-11");
+assert.equal(paperEntry.news, paperNews);
+assert.equal(paperEntry.url, paperUrl);
+assert.equal(paperEntry.file, undefined);
+assert.equal(newsHref(paperEntry), paperUrl);
+assert.equal(newsHref(icorpsEntry), "blog/post.html?slug=nsf-icorps-quantum-x");
 assert.deepEqual(
   newsPosts(posts.posts).map((post) => post.slug),
-  ["nsf-icorps-quantum-x", "qwc-2026"]
+  ["optically-pumped-magnetometer", "nsf-icorps-quantum-x", "qwc-2026"]
 );
 
 const home = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const newsHtml = home.slice(home.indexOf("<!-- build:news -->"), home.indexOf("<!-- /build:news-dup -->"));
+assert.match(newsHtml, new RegExp(`<a href="${paperUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}" target="_blank" rel="noopener noreferrer">${paperNews.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</a>`));
 assert.match(newsHtml, /<a href="blog\/post\.html\?slug=nsf-icorps-quantum-x">Completed NSF I-Corps Quantum\+X with Q BioSense<\/a>/);
 assert.match(newsHtml, /slug=qwc-2026/);
 assert.doesNotMatch(newsHtml, /stop-slop-humanizer|slug=welcome/);
@@ -193,7 +205,8 @@ assert.equal(feed[1].cover.src, "https://i.ytimg.com/vi/ZDbmKt-fsvk/hqdefault.jp
 assert.equal(feed[1].cover.video, true);
 assert.equal(feed[2].cover.src, "assets/blog/qwc-2026.webp");
 assert.equal(feed.some((item) => /stop-slop|welcome/.test(item.href || "")), false);
-assert.deepEqual(newsPosts(posts.posts).map((post) => post.slug), ["nsf-icorps-quantum-x", "qwc-2026"]);
+assert.deepEqual(newsPosts(posts.posts).map((post) => post.slug), ["optically-pumped-magnetometer", "nsf-icorps-quantum-x", "qwc-2026"]);
+assert.equal(feed.some((item) => item.href === paperUrl || item.title === paperNews), false);
 assert.equal(homeFeed([{ type: "update", date: "2026-10-18", text: "Newer line" }, ...posts.posts], markdownBySlug)[0].title, "Newer line");
 assert.equal(homeFeed([{ type: "update", date: "2026-10-18" }], {}).length, 0);
 const feedHtml = homeFeedHtml(feed);

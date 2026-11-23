@@ -97,7 +97,7 @@ The note, in first person. Use only facts already on the site or in the CV.
 
 ## Latest news
 
-The band under the hero scrolls the five newest posts whose `category` is `News`, newest first. Posts in the `Posts` category stay on the blog index and do not appear in the band. Each line links to that post, with a dot between items. The line is the post’s `news` text when that field is set, and the title otherwise. Fewer than five News posts shows whatever exists. The band is hidden when there are no News posts. After you add or remove a News post, run `node scripts/build.mjs` so `index.html` matches.
+The band under the hero scrolls the five newest posts whose `category` is `News`, newest first. Posts in the `Posts` category stay on the blog index and do not appear in the band. Each line links to that post, with a dot between items. Set `url` to an https address, such as a DOI, when the line should open that page instead of a note. A News entry with `url` and no Markdown file stays on this band only. The line is the post’s `news` text when that field is set, and the title otherwise. Fewer than five News posts shows whatever exists. The band is hidden when there are no News posts. After you add or remove a News post, run `node scripts/build.mjs` so `index.html` matches.
 
 Under that band, the homepage shows up to three cards: the newest News posts mixed with quick updates. Each card uses the post cover when there is one.
 

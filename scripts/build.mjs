@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { homeFeed, homeFeedHtml, newsPosts } from "../js/blog.js";
+import { homeFeed, homeFeedHtml, newsHref, newsPosts } from "../js/blog.js";
 import { iconMarkup } from "../js/icon-paths.js";
 
 const profile = JSON.parse(readFileSync(new URL("../data/profile.json", import.meta.url), "utf8"));
@@ -190,8 +190,9 @@ function tickerItems(posts, hidden) {
 function newsItem(post, hidden) {
   const tab = hidden ? ` tabindex="-1"` : "";
   const hide = hidden ? ` aria-hidden="true"` : "";
-  const href = `blog/post.html?slug=${encodeURIComponent(post.slug)}`;
-  return `<li${hide}><a href="${href}"${tab}>${escapeHtml(post.news || post.title)}</a></li>`;
+  const href = newsHref(post);
+  const external = /^https?:\/\//i.test(href) ? ` target="_blank" rel="noopener noreferrer"` : "";
+  return `<li${hide}><a href="${escapeAttr(href)}"${external}${tab}>${escapeHtml(post.news || post.title)}</a></li>`;
 }
 
 function venueMarkup(text) {
