@@ -191,6 +191,28 @@
   ],
   "publications": [
     {
+      "title": "Development of an optically pumped magnetometer with controlled phantom based validation for biomedical signal detection",
+      "authors": [
+        "Md Nazmul Islam",
+        "Qiang Guan",
+        "Tao Shen"
+      ],
+      "type": "journal",
+      "venue": "Sensors and Actuators A: Physical, article 118830",
+      "year": "2026",
+      "date": "Nov 2026",
+      "url": "https://doi.org/10.1016/j.sna.2026.118830",
+      "match": [
+        "optically pumped magnetometer",
+        "opm",
+        "phantom",
+        "biomedical signal",
+        "magnetometer",
+        "sensors and actuators",
+        "quantum sensing"
+      ]
+    },
+    {
       "title": "Interpretable Differential Diagnosis of Non-COVID Viral Pneumonia, Lung Opacity and COVID-19 Using Tuned Transfer Learning and Explainable AI",
       "authors": [
         "Md Nazmul Islam",
