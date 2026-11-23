@@ -28,6 +28,12 @@ export function postHref(slug, prefix = "") {
   return `${prefix}post.html?slug=${encodeURIComponent(slug)}`;
 }
 
+export function newsHref(post) {
+  const url = String(post && post.url || "").trim();
+  if (/^https?:\/\//i.test(url)) return url;
+  return `blog/post.html?slug=${encodeURIComponent(post.slug)}`;
+}
+
 export function canonicalCategory(value) {
   return /^news$/i.test(String(value || "").trim()) ? "News" : "Posts";
 }
@@ -52,7 +58,7 @@ export function homeFeed(entries, markdownBySlug = {}, limit = 3) {
       if (update) items.push(update);
       continue;
     }
-    if (!entry.slug || !entry.title || canonicalCategory(entry.category) !== "News") continue;
+    if (!entry.slug || !entry.title || !entry.file || canonicalCategory(entry.category) !== "News") continue;
     const source = Object.prototype.hasOwnProperty.call(markdownBySlug, entry.slug) ? markdownBySlug[entry.slug] : "";
     items.push(postFeedItem(parsePost(source, entry)));
   }

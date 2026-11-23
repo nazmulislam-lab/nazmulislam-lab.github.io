@@ -1,4 +1,4 @@
-import { canonicalCategory, homeFeed, homeFeedHtml, isUpdate, newsPosts } from "./blog.js";
+import { canonicalCategory, homeFeed, homeFeedHtml, isUpdate, newsHref, newsPosts } from "./blog.js";
 import { initChat } from "./chat.js";
 import { initChrome } from "./chrome.js";
 import { iconSvg, paintIcons, renderFooterSocial } from "./icons.js";
@@ -115,8 +115,13 @@ function renderTicker(items) {
 function newsLink(item, hidden) {
   const li = document.createElement("li");
   const link = document.createElement("a");
-  link.href = `blog/post.html?slug=${encodeURIComponent(item.slug)}`;
+  const href = newsHref(item);
+  link.href = href;
   link.textContent = item.news || item.title;
+  if (/^https?:\/\//i.test(href)) {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  }
   if (hidden) {
     li.setAttribute("aria-hidden", "true");
     link.tabIndex = -1;

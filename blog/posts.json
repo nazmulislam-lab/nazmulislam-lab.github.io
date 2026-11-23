@@ -1,6 +1,15 @@
 {
   "posts": [
     {
+      "slug": "optically-pumped-magnetometer",
+      "title": "Development of an optically pumped magnetometer with controlled phantom based validation for biomedical signal detection",
+      "date": "2026-11",
+      "published": "2026-11",
+      "category": "News",
+      "news": "New paper in Sensors and Actuators A: Physical on an optically pumped magnetometer for biomedical signal detection",
+      "url": "https://doi.org/10.1016/j.sna.2026.118830"
+    },
+    {
       "slug": "welcome",
       "title": "Welcome to my site",
       "date": "2026-10-11",
